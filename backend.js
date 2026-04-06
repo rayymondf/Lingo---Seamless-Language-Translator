@@ -1,39 +1,24 @@
-const textInput = document.getElementById("text");
-const translationInput = document.getElementById("translation");
-const translateBtn = document.getElementById("translateBtn");
+    const textInput = document.getElementById("textInput");
+    const translationInput = document.getElementById("translationInput");
+    const translateBtn = document.getElementById("translateBtn");
 
-translateBtn.addEventListener("click", async function () {
-    const text = textInput.value.trim();
+async function translation(){
+        const res = await fetch("http://127.0.0.1:5000/translate", {
+        method: "POST",
+        body: JSON.stringify({
+            q: textInput.value,
+            source: "en",
+            target: "fr",
+            format: "text"
+        }),
+        headers: { "Content-Type": "application/json" }
+    });
 
-    if (text === "") {
-        translationInput.value = "Please enter text";
-        return;
-    }
+    return await res.json();
+}
 
-    translationInput.value = "Translating...";
 
-    try {
-        const response = await fetch("http://localhost:5000/translate", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                q: text,
-                source: "en",      // language the user types in
-                target: "es",      // language you want to translate to
-                format: "text"
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error("Translation request failed");
-        }
-
-        const data = await response.json();
-        translationInput.value = data.translatedText;
-    } catch (error) {
-        translationInput.value = "Error translating text";
-        console.error(error);
-    }
-});
+translateBtn.addEventListener("click", async function(){
+    const data = await translation();
+    translationInput.value = data.translatedText;
+})
