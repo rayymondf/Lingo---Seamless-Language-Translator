@@ -1,6 +1,7 @@
 const textInput = document.getElementById("textInput")
 const translationInput = document.getElementById("translationInput")
 const translateBtn = document.getElementById("translateBtn")
+const targetLanguage = document.getElementById("targetLanguage")
 let counter = 0
 let inputHistory = []
 let translateHistory = []
@@ -30,7 +31,7 @@ let translateHistory = []
 
 
 
-async function testDeepL() {
+async function testDeepL(selectedLanguage) {
     const response = await fetch("https://api-free.deepl.com/v2/translate", {
         method: "POST",
         headers: {
@@ -39,7 +40,7 @@ async function testDeepL() {
         },
         body: JSON.stringify({
             text: [textInput.value],
-            target_lang: "FR"
+            target_lang: selectedLanguage
         })
     });
 
@@ -47,7 +48,20 @@ async function testDeepL() {
     console.log(data.translations[0].text)
     return data.translations[0].text
 }
+async function loadLanguages() {
+    const response = await fetch("https://api-free.deepl.com/v2/languages?type=target", {
+        method: "GET",
+        headers: {
+            "Authorization": "DeepL-Auth-Key 0b7f2edf-519b-4fc1-b0ea-1d694c61180a:fx"
+        }
+    })
+
+    const languages = await response.json()
+
+    console.log(languages)
+}
+loadLanguages()
 
 translateBtn.addEventListener("click", async function(){
-    translationInput.value = await testDeepL()
+    translationInput.value = await testDeepL(targetLanguage.value)
 })

@@ -2,25 +2,50 @@ body {
     margin: 0;
     padding: 12px;
     box-sizing: border-box;
-
     width: 320px;
     min-width: 280px;
     max-width: 400px;
-
     font-family: Arial, sans-serif;
 }
 
+.interface {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 
+
+}
 
 .row {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 16px;
 }
 
-#textInput,#translationInput{
+#textInput,
+#translationInput,
+#targetLanguage {
     padding: 8px 16px;
     flex: 1;
     width: 100%;
+    border: 1px solid #cfcfcf;
+    border-radius: 6px;
+}
+
+.languageLabel {
+    min-width: 88px;
+    font-size: 14px;
+}
+
+#translateBtn {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    background: #1f6feb;
+    color: #fff;
+    cursor: pointer;
+}
+
+#translateBtn:hover {
+    background: #1756b3;
 }
