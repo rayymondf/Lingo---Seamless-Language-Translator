@@ -8,7 +8,7 @@ const ui = {
 
 const api = {
   baseUrl: "https://api-free.deepl.com/v2",
-  authKey: "0b7f2edf-519b-4fc1-b0ea-1d694c61180a:fx"
+  authKey: ""
 };
 
 const fallbackLanguages = [
