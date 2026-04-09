@@ -25,7 +25,7 @@ const translateBtn = document.getElementById("translateBtn")
 //     translationInput.value = data.translatedText
 // })
 
-
+//test
 
 async function testDeepL(selectedLanguage) {
     const response = await fetch("https://api-free.deepl.com/v2/translate", {
