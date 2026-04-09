@@ -1,22 +1,42 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lingo</title>
         <link rel="stylesheet" href="styles.css">
     </head>
 
-    <body>
-        <div class="interface">
-            <div class="row">
-                <input type="text" id="textInput" placeholder="Type here">
-            </div>
-            <div class="row">
-                <label for="targetLanguage" class="languageLabel">Translate to: </label>
-                <select id="targetLanguage"></select>
-            </div>
-            <div class="row">
-                <input type="text" id="translationInput" placeholder="Translation" disabled>
-                <button id="translateBtn">Translate</button>
-            </div>
-        </div>
+    <body data-theme="light">
+        <main class="panel">
+            <header class="panel__header">
+                <div>
+                    <p class="panel__eyebrow">Lingo</p>
+                    <h1 class="panel__title">Translate Cleanly</h1>
+                    <p class="panel__intro">Easy-to-read translator for quick everyday use</p>
+                </div>
+            </header>
+
+            <section class="card">
+                <label class="field" for="textInput">
+                    <span class="field__label">Text to translate</span>
+                    <textarea id="textInput" rows="5" placeholder="Type or paste your text here"></textarea>
+                </label>
+
+                <label class="field" for="targetLanguage">
+                    <span class="field__label">Translate to</span>
+                    <select id="targetLanguage" aria-label="Choose a target language"></select>
+                </label>
+
+                <button id="translateBtn" type="button">Translate</button>
+
+                <label class="field" for="translationInput">
+                    <span class="field__label">Translation</span>
+                    <textarea id="translationInput" rows="5" placeholder="Your translation will appear here" readonly></textarea>
+                </label>
+            </section>
+        </main>
+
         <script src="userInterface.js"></script>
         <script src="backendService.js"></script>
     </body>

@@ -1,4 +1,5 @@
 const textInput = document.getElementById("textInput")
+const targetLanguage = document.getElementById("targetLanguage")
 const translationInput = document.getElementById("translationInput")
 const translateBtn = document.getElementById("translateBtn")
 
@@ -25,8 +26,6 @@ const translateBtn = document.getElementById("translateBtn")
 //     translationInput.value = data.translatedText
 // })
 
-
-
 async function testDeepL(selectedLanguage) {
     const response = await fetch("https://api-free.deepl.com/v2/translate", {
         method: "POST",
@@ -38,15 +37,29 @@ async function testDeepL(selectedLanguage) {
             text: [textInput.value],
             target_lang: selectedLanguage
         })
-    });
+    })
 
-    const data = await response.json();
-    console.log(data.translations[0].text)
+    const data = await response.json()
+
+    if (!response.ok || !data.translations || !data.translations[0]) {
+        throw new Error("Translation failed")
+    }
+
     return data.translations[0].text
 }
 
 
 translateBtn.addEventListener("click", async function(){
+    if (textInput.value.trim() === "") {
+        translationInput.value = "Please enter text first"
+        return
+    }
+
+    if (targetLanguage.value === "") {
+        translationInput.value = "Please choose a language"
+        return
+    }
+
     translationInput.value = "Translating..."
     try {
         translationInput.value = await testDeepL(targetLanguage.value)
